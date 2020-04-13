@@ -1,5 +1,7 @@
 package died.guia06;
 
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,19 +46,34 @@ public class Curso {
 	 *      c) puede estar inscripto en simultáneo a no más de 3 cursos del mismo ciclo lectivo.
 	 * @param a
 	 * @return
+	 * @throws IOException 
 	 */
-	public Boolean inscribir(Alumno a) {
-		log.registrar(this, "inscribir ",a.toString());
+	public Boolean inscribir(Alumno a) throws IOException {
+		try {
+			log.registrar(this, "inscribir ",a.toString());
+		}
+		catch(IOException e){
+			System.out.println("No se puede registrar al curso: "+e.getMessage());
+			e.printStackTrace();
+		}
+		
 		return false;
 	}
 	
 	
 	/**
 	 * imprime los inscriptos en orden alfabetico
+	 * @throws IOException 
 	 */
-	public void imprimirInscriptos() {
-		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+	public void imprimirInscriptos() throws IOException {
+		try {
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+		}
+		catch(IOException e) {
+			System.out.println("No se puede registrar al curso: " +e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 
-}
+} 
