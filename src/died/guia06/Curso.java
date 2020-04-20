@@ -75,7 +75,7 @@ public class Curso{
 	}
 	
 	/**
-	 * imprime los inscriptos en orden alfabetico. 
+	 * imprime los inscriptos en orden alfabetico de menor a mayor. 
 	 */
 	public void imprimirInscriptos() {
 		ArrayList<String> lista = new ArrayList<String>();
@@ -83,6 +83,7 @@ public class Curso{
 		Collections.sort(lista);
 		System.out.println(lista);
 	}
+
 	
 	/**
 	 * Imprime los inscriptos ordenados por los creditos de cada alumno, de menor a mayor.

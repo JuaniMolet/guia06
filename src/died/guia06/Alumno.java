@@ -85,6 +85,14 @@ public class Alumno implements Comparable {
 	public List<Curso> getAprobados() {
 		return aprobados;
 	}
+	
+	public List<String> getAprobadosPorNombre() {
+		List<String> lista = new ArrayList<String>();
+		for(Curso unCurso : aprobados) {
+			lista.add(unCurso.getNombre());
+		}
+		return lista;
+	}
 
 	public void setAprobados(List<Curso> aprobados) {
 		this.aprobados = aprobados;
