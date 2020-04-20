@@ -25,7 +25,11 @@ public class App {
 		a1.aprobar(c1);//Juan 15 Creditos
 		System.out.println("Cursos aprobados por Juan:" +a1.getAprobadosPorNombre());
 		System.out.println("Creditos de Juan: "+a1.creditosObtenidos());
-		c2.inscribir(a1);
+		try {
+			c2.inscribirAlumno(a1);
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
 		System.out.println("Alumnos en curso c2: "+c2.getInscriptosPorNombre());
 		
 		//Inscribir alumnos al curso c2.
@@ -34,10 +38,12 @@ public class App {
 		a4.aprobar(c3);//Hugo 30 Creditos
 		a5.aprobar(c1);
 		a5.aprobar(c2);//Maria 35 Creditos
-		c2.inscribir(a2);
-		c2.inscribir(a3);
-		c2.inscribir(a4);
-		c2.inscribir(a5);
+		
+		try {
+			c2.inscribirAlumno(a2);
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
 		System.out.println("Alumnos en curso c2: "+c2.getInscriptosPorNombre());
 		System.out.println("Mostrar el curso en orden alfabetico: ");
 		c2.imprimirInscriptos();
@@ -45,6 +51,30 @@ public class App {
 		c2.imprimirInscriptosPorLibreta();
 		System.out.println("Mostrar el curso ordenado por Creditos: ");
 		c2.imprimirInscriptosPorCreditos();
+		
+		//inscripcion sin tener creditos.
+		Alumno al1 = new Alumno("Marcos", 24400);
+		try {
+			c4.inscribirAlumno(al1);
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+		//inscripcion sin cupos.
+		Alumno al2 = new Alumno("Sebastian", 24400);
+		Curso c5 = new Curso(1, "Curso5", 1, 0, 40, 30);
+		al2.aprobar(c4);
+		try {
+			c5.inscribirAlumno(al2);
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+		//inscripcion ya regular.
+		try {
+			c4.inscribirAlumno(al2);
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+		
 		
 		
 	}
