@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class CursoTest {
 	
-	Alumno a1, a2, a3, a4;
+	Alumno a1, a2, a3, a4, a5;
 	Curso c1, c2, c3, c4, c5;
 	
 	@BeforeEach
@@ -55,7 +55,10 @@ class CursoTest {
 	c1.inscribir(a2);//B
 	c1.inscribir(a1);//A
 
-	
+	//Inscripcion correcta inscripcionAlumno().
+	a5 = new Alumno("Nuevo", 24500);
+	a5.inscripcionAceptada(c3);
+	a5.aprobar(c3);
 	
 	}
 	
@@ -101,5 +104,18 @@ class CursoTest {
 		assertTrue(esperado, "El alumno se ha podido inscribir al curso");
 	}
 	
-
+	/**
+	 * Testea el metodo creado en el paso 07 inscribirAlumno().
+	 */
+	
+	@Test 
+	void testInscribirAlumno() {
+		try {
+			c5.inscribirAlumno(a5);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		boolean esperado = c5.getInscriptos().contains(a5);
+		assertTrue(esperado);
+	}
 }

@@ -1,5 +1,6 @@
 package died.guia06;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -74,6 +75,25 @@ public class Curso{
 		return false;
 	}
 	
+	
+	/**
+	 * Metodo que cuenta la cantidad de cursos del mismo cicloLectivo.
+	 */
+	public boolean cursosSuperados (Alumno a) {
+		int contadorCursos = 0;
+		for(Curso unCurso : a.getCursando()) {
+			if(unCurso.getCicloLectivo() == cicloLectivo) {
+				contadorCursos++;
+			}
+		}
+		if(contadorCursos > 3) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
 	/**
 	 * imprime los inscriptos en orden alfabetico de menor a mayor. 
 	 */
@@ -101,6 +121,15 @@ public class Curso{
 		System.out.println(this.getInscriptosPorNombre());
 	}
 	
+	/**
+	 * Devuelve true si un curso tiene cupos disponibles. 
+	 */
+	public boolean cuposDisponibles() {
+		if(this.getCupo()>0) {
+			return true;
+		}
+		return false;
+	}
 
 	//SETERS Y GETERS.
 	public Integer creditos(){
@@ -166,6 +195,10 @@ public class Curso{
 		return a;
 	}
 
+	public List<Alumno> getInscriptos() {
+		return inscriptos;
+	}
+	
 	public void setInscriptos(List<Alumno> inscriptos) {
 		this.inscriptos = inscriptos;
 	}
@@ -177,5 +210,46 @@ public class Curso{
 	public void setCreditosRequeridos(Integer creditosRequeridos) {
 		this.creditosRequeridos = creditosRequeridos;
 	}
+	
+	//Paso 07
+	public void inscribirAlumno(Alumno a1) throws Exception {
+		
+		boolean creditosReq = (a1.creditosObtenidos() >= creditosRequeridos);
+		if(creditosReq == false) {
+			throw new CreditosInsuficientes("Creditos insuficientes");
+		}
+		boolean cupos = this.cuposDisponibles();
+		if(cupos == false) {
+			throw new SinCupos("No quedan cupos en el curso");
+		}
+		boolean alumnoRegular;
+		if(a1.getAprobados().contains(this)) {
+			alumnoRegular = true;
+		}
+		else {
+			alumnoRegular = false;
+		}
+		if(alumnoRegular == true) {
+			throw new AlumnoRegular("El alumno ya es regular en el curso");
+		}
+		boolean cursosSuperados = cursosSuperados(a1);
+		if(cursosSuperados == true) {
+			throw new CantidadDeCursosSuperados("El alumno ya esta inscripto en mas de 3 cursos del mismo ciclo lectivo");
+		}
+		
+		
+		try{
+			log.registrar(this, "inscribir", a1.toString());
+			a1.inscripcionAceptada(this);
+			this.inscribir(a1);
+			System.out.println("El alumno fue inscripto con exito");
+		}
+		catch (IOException e){
+			throw new RegistroAuditoriaException("Error al crear los logs");
+		}
+		
+
+	}
+	
 	
 } 

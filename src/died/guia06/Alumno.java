@@ -49,6 +49,7 @@ public class Alumno implements Comparable {
 		return unAlumno.nombre.compareTo(nombre);
 	}
 	
+	
 	//SETERS Y GETTTERS.
 	public String getNombre() {
 		return nombre;
