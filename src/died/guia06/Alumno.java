@@ -69,6 +69,14 @@ public class Alumno implements Comparable {
 	public List<Curso> getCursando() {
 		return cursando;
 	}
+	
+	public List<String> getCursandoPorNombre() {
+		List<String> lista = new ArrayList<String>();
+		for(Curso unCurso : cursando) {
+			lista.add(unCurso.getNombre());
+		}
+		return lista;
+	}
 
 	public void setCursando(List<Curso> cursando) {
 		this.cursando = cursando;

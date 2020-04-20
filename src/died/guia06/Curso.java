@@ -77,7 +77,6 @@ public class Curso{
 	/**
 	 * imprime los inscriptos en orden alfabetico. 
 	 */
-	
 	public void imprimirInscriptos() {
 		ArrayList<String> lista = new ArrayList<String>();
 		lista = this.getInscriptosPorNombre();
